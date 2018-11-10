@@ -1,7 +1,7 @@
 {
-  "name": "aws-utils",
+  "name": "aws-sdk-wrapper",
   "version": "1.0.0",
-  "description": "Util scripts for managing aws",
+  "description": "Wrappers and utils for managing aws",
   "main": "index.js",
   "author": "Hendri Pretorius",
   "license": "MIT",
