@@ -1,0 +1,12 @@
+{
+  "name": "aws-sdk-allow-ssh",
+  "version": "1.0.0",
+  "description": "Allow ssh from your ip",
+  "main": "index.js",
+  "author": "Hendri Pretorius",
+  "license": "MIT",
+  "dependencies": {
+    "aws-utils": "file:../wrapper",
+    "public-ip": "2.4.0"
+  }
+}
