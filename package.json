@@ -1,0 +1,11 @@
+{
+  "name": "aws-utils",
+  "version": "1.0.0",
+  "description": "Util scripts for managing aws",
+  "main": "index.js",
+  "author": "Hendri Pretorius",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "2.353.0"
+  }
+}
