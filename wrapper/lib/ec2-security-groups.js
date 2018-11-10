@@ -28,7 +28,7 @@ module.exports.allowIncomming = async (groupId, protocol, cidr, port, descriptio
   const params = {
     GroupId: groupId,
     IpPermissions: [
-      buildRuleParams(protocol, cidr, port),
+      buildRuleParams(protocol, cidr, port, description),
     ],
   };
   await ec2.authorizeSecurityGroupIngress(params).promise();
@@ -38,10 +38,20 @@ module.exports.removeIncomming = async (groupId, protocol, cidr, port, descripti
   const params = {
     GroupId: groupId,
     IpPermissions: [
-      buildRuleParams(protocol, cidr, port),
+      buildRuleParams(protocol, cidr, port, description),
     ],
   };
   await ec2.revokeSecurityGroupIngress(params).promise();
+};
+
+module.exports.dumpIncommingRules = async (groupId) => {
+  const rules = await module.exports.getIncommingRules();
+  rules.forEach((rule) => {
+    console.log('%s :%s -> :%s', rule.IpProtocol, rule.FromPort, rule.ToPort);
+    rule.IpRanges.forEach((range) => {
+      console.log('  %s (%s)', range.CidrIp, range.Description);
+    });
+  });
 };
 
 function buildRuleParams(protocol, cidr, port, description) {
