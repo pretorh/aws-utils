@@ -14,13 +14,15 @@ async function removeOld(groupId) {
 
   const sshRules = rules.filter((rule) => rule.FromPort === 22 && rule.ToPort === 22);
 
-  sshRules.forEach((rule) => {
+  const all = sshRules.map((rule) => {
     const ips = rule.IpRanges.filter((range) => range.Description === DESCRIPTION);
-    ips.forEach(async (ip) => {
+    const removeRules = ips.map((ip) => {
       console.log('removing rule for %s', ip.CidrIp);
-      await ec2rules.removeIncomming(groupId, 'tcp', ip.CidrIp, 22, DESCRIPTION);
+      return ec2rules.removeIncomming(groupId, 'tcp', ip.CidrIp, 22, DESCRIPTION);
     });
+    return Promise.all(removeRules);
   });
+  await Promise.all(all);
 }
 
 function perform(action, groupId) {
