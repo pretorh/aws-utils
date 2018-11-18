@@ -2,6 +2,7 @@ const ec2rules = require('../wrapper/lib/ec2-security-groups');
 const publicIp = require('public-ip');
 
 const DESCRIPTION = 'allow incomming ssh from my ip';
+const DEFAULT_SSH_GROUP_NAME = process.env.SSH_GROUP_NAME || 'allow ssh';
 
 async function add(groupId) {
   const ip = await publicIp.v4();
@@ -25,7 +26,12 @@ async function removeOld(groupId) {
   await Promise.all(all);
 }
 
-function perform(action, groupId) {
+async function perform(action, groupId) {
+  if (groupId === undefined) {
+    groupId = await ec2rules.findGroupId(DEFAULT_SSH_GROUP_NAME);
+    console.log('resolved group "%s" to "%s"', DEFAULT_SSH_GROUP_NAME, groupId);
+  }
+
   if (action === 'a') {
     return add(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
