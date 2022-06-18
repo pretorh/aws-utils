@@ -36,7 +36,8 @@ async function perform(action, groupId) {
     return add(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
   } else {
-    return removeOld(groupId);
+    return removeOld(groupId)
+      .then(() => ec2rules.dumpIncommingRules(groupId));
   }
 }
 
