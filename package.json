@@ -1,12 +1,12 @@
 {
-  "name": "aws-sdk-allow-ssh",
+  "name": "aws-sdk-util",
   "version": "1.0.0",
-  "description": "Allow ssh from your ip",
+  "description": "Wrappers and utils for managing AWS",
   "main": "index.js",
   "author": "Hendri Pretorius",
   "license": "MIT",
   "dependencies": {
-    "aws-utils": "file:../wrapper",
+    "aws-sdk": "2.353.0",
     "public-ip": "2.4.0"
   }
 }

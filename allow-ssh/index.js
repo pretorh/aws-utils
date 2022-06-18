@@ -1,4 +1,4 @@
-const ec2rules = require('../wrapper/lib/ec2-security-groups');
+const ec2rules = require('../lib/ec2-security-groups');
 const publicIp = require('public-ip');
 
 const DESCRIPTION = 'allow incomming ssh from my ip';
