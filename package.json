@@ -5,8 +5,14 @@
   "main": "index.js",
   "author": "Hendri Pretorius",
   "license": "MIT",
+  "scripts": {
+    "lint": "npx eslint bin/*.js lib/*.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.1157.0",
     "public-ip": "2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0"
   }
 }
