@@ -32,12 +32,14 @@ async function perform(action, groupId) {
     console.log('resolved group "%s" to "%s"', DEFAULT_SSH_GROUP_NAME, groupId);
   }
 
-  if (action === 'a') {
+  if (action === 'add' || action === 'a' || !action) {
     return add(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
-  } else {
+  } else if (action === 'remove' || action === 'r') {
     return removeOld(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
+  } else {
+    throw new Error(`unknown action ${action}`);
   }
 }
 
