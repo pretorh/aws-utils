@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const ec2rules = require('../lib/ec2-security-groups');
 const publicIp = require('public-ip');
 
