@@ -1,12 +1,16 @@
 {
   "name": "aws-sdk-util",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Wrappers and utils for managing AWS",
   "main": "index.js",
   "author": "Hendri Pretorius",
   "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=14.16"
+  },
   "scripts": {
-    "lint": "npx eslint bin/*.js lib/*.js"
+    "lint": "npx eslint bin/*.js lib/*.js .eslintrc.cjs"
   },
   "dependencies": {
     "aws-sdk": "^2.1157.0",
