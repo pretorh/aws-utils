@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const ec2rules = require('../lib/ec2-security-groups');
-const publicIp = require('public-ip');
+import publicIp from 'public-ip';
+import * as ec2rules from '../lib/ec2-security-groups.js';
 
 const DESCRIPTION = 'allow incomming ssh from my ip';
 const DEFAULT_SSH_GROUP_NAME = process.env.SSH_GROUP_NAME || 'allow ssh';
