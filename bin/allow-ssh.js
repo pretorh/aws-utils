@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import publicIp from 'public-ip';
+import { publicIpv4 } from 'public-ip';
 import * as ec2rules from '../lib/ec2-security-groups.js';
 
 const DESCRIPTION = 'allow incomming ssh from my ip';
 const DEFAULT_SSH_GROUP_NAME = process.env.SSH_GROUP_NAME || 'allow ssh';
 
 async function add(groupId) {
-  const ip = await publicIp.v4();
+  const ip = await publicIpv4();
   console.log('adding rule to allow %s', ip);
   await ec2rules.allowIncomming(groupId, 'tcp', `${ip}/32`, 22, DESCRIPTION);
 }
