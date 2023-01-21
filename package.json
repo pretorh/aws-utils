@@ -14,6 +14,7 @@
     "lint": "npx eslint bin/* lib/* .eslintrc.cjs"
   },
   "dependencies": {
+    "@aws-sdk/client-ec2": "^3.255.0",
     "aws-sdk": "^2.1157.0",
     "public-ip": "^6.0.1"
   },
