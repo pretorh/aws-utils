@@ -10,6 +10,7 @@
     "node": ">=14.16"
   },
   "scripts": {
+    "build": "tsc && chmod -v +x ./dist/bin/*.js",
     "lint": "npx eslint bin/*.js lib/*.js .eslintrc.cjs"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "eslint": "^8.33.0",
-    "eslint-config-airbnb-base": "^15.0.0"
+    "eslint-config-airbnb-base": "^15.0.0",
+    "typescript": "^4.9.5"
   }
 }
