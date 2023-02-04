@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc && chmod -v +x ./dist/bin/*.js",
-    "lint": "npx eslint bin/*.js lib/*.js .eslintrc.cjs"
+    "lint": "npx eslint bin/* lib/* .eslintrc.cjs"
   },
   "dependencies": {
     "aws-sdk": "^2.1157.0",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "eslint": "^8.33.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "typescript": "^4.9.5"
   }
 }
