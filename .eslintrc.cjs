@@ -1,29 +1,23 @@
 module.exports = {
-    "env": {
-        "commonjs": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-      'airbnb-base',
-      "eslint:recommended",
-    ],
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": "latest"
-    },
-    "rules": {
-      // old code to fix,
-      'no-console': 'off',
-      'import/extensions': 'off',
-      'no-param-reassign': 'off',
-      'import/newline-after-import': 'off',
-      'no-else-return': 'off',
-      indent: 'off',
-      'quote-props': 'off',
-      quotes: 'off',
-      'no-use-before-define': 'off',
-      'array-bracket-spacing': 'off',
-      'comma-dangle': 'off',
-    }
+  env: {
+    commonjs: true,
+    es2021: true,
+    node: true,
+  },
+  extends: [
+    'airbnb-base',
+    'eslint:recommended',
+  ],
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 'latest',
+  },
+  rules: {
+    // old code to fix,
+    'no-console': 'off',
+    'import/extensions': 'off',
+    'no-param-reassign': 'off',
+    'import/newline-after-import': 'off',
+    'no-use-before-define': 'off',
+  },
 };

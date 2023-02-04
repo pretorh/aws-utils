@@ -36,12 +36,12 @@ async function perform(action, groupId) {
   if (action === 'add' || action === 'a' || !action) {
     return add(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
-  } else if (action === 'remove' || action === 'r') {
+  }
+  if (action === 'remove' || action === 'r') {
     return removeOld(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
-  } else {
-    throw new Error(`unknown action ${action}`);
   }
+  throw new Error(`unknown action ${action}`);
 }
 
 perform(process.argv[2], process.argv[3])
