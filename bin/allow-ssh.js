@@ -29,19 +29,20 @@ async function removeOld(groupId) {
 
 async function perform(action, groupId) {
   if (groupId === undefined) {
-    groupId = await ec2rules.findGroupId(DEFAULT_SSH_GROUP_NAME);
+    const resolvedGroupId = await ec2rules.findGroupId(DEFAULT_SSH_GROUP_NAME);
     console.log('resolved group "%s" to "%s"', DEFAULT_SSH_GROUP_NAME, groupId);
+    return perform(action, resolvedGroupId);
   }
 
   if (action === 'add' || action === 'a' || !action) {
     return add(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
-  } else if (action === 'remove' || action === 'r') {
+  }
+  if (action === 'remove' || action === 'r') {
     return removeOld(groupId)
       .then(() => ec2rules.dumpIncommingRules(groupId));
-  } else {
-    throw new Error(`unknown action ${action}`);
   }
+  throw new Error(`unknown action ${action}`);
 }
 
 perform(process.argv[2], process.argv[3])
