@@ -29,8 +29,9 @@ async function removeOld(groupId) {
 
 async function perform(action, groupId) {
   if (groupId === undefined) {
-    groupId = await ec2rules.findGroupId(DEFAULT_SSH_GROUP_NAME);
+    const resolvedGroupId = await ec2rules.findGroupId(DEFAULT_SSH_GROUP_NAME);
     console.log('resolved group "%s" to "%s"', DEFAULT_SSH_GROUP_NAME, groupId);
+    return perform(action, resolvedGroupId);
   }
 
   if (action === 'add' || action === 'a' || !action) {

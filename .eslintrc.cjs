@@ -13,10 +13,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    // old code to fix,
-    'no-console': 'off',
-    'import/extensions': 'off',
-    'no-param-reassign': 'off',
-    'import/newline-after-import': 'off',
+    'no-console': 'off', // cli
+    'import/extensions': 'off', // module type
   },
 };
