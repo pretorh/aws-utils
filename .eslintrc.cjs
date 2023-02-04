@@ -18,6 +18,5 @@ module.exports = {
     'import/extensions': 'off',
     'no-param-reassign': 'off',
     'import/newline-after-import': 'off',
-    'no-use-before-define': 'off',
   },
 };
