@@ -34,6 +34,10 @@ module.exports = {
       plugins: [
         '@typescript-eslint',
       ],
+      rules: {
+        'no-console': 'off', // cli
+        'import/extensions': 'off', // module type
+      },
     },
   ],
   rules: {
