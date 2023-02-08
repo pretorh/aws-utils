@@ -10,14 +10,18 @@
     "node": ">=14.16"
   },
   "scripts": {
-    "lint": "npx eslint bin/*.js lib/*.js .eslintrc.cjs"
+    "build": "tsc && chmod -v +x ./dist/bin/*.js",
+    "lint": "npx eslint bin/* lib/* .eslintrc.cjs"
   },
   "dependencies": {
     "aws-sdk": "^2.1157.0",
     "public-ip": "^6.0.1"
   },
   "devDependencies": {
+    "@types/node": "^18.11.19",
     "eslint": "^8.33.0",
-    "eslint-config-airbnb-base": "^15.0.0"
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "typescript": "^4.9.5"
   }
 }
