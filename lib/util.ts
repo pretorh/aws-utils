@@ -1,4 +1,9 @@
-export default function buildRuleParams(protocol, cidr, port, description) {
+export default function buildRuleParams(
+  protocol: string,
+  cidr: string,
+  port: number,
+  description: string,
+) {
   return {
     IpProtocol: protocol,
     FromPort: port,

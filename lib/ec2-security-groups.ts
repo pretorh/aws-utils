@@ -3,9 +3,9 @@ import buildRuleParams from './util.js';
 
 const ec2 = new AWS.EC2();
 
-export const findGroupId = async (groupName) => {
+export const findGroupId = async (groupName: string) => {
   const results = await ec2.describeSecurityGroups().promise();
-  const groups = results.SecurityGroups;
+  const groups = results.SecurityGroups || [];
   const found = groups.filter((group) => group.GroupName === groupName)[0];
   if (!found) {
     throw new Error('no group found');
@@ -13,12 +13,12 @@ export const findGroupId = async (groupName) => {
   return found.GroupId;
 };
 
-export const getIncommingRules = async (groupId) => {
+export const getIncommingRules = async (groupId: string) => {
   const params = {
     GroupIds: [groupId],
   };
   const results = await ec2.describeSecurityGroups(params).promise();
-  const groups = results.SecurityGroups;
+  const groups = results.SecurityGroups || [];
   const found = groups[0];
   if (!found) {
     throw new Error('no group found');
@@ -26,7 +26,13 @@ export const getIncommingRules = async (groupId) => {
   return found.IpPermissions;
 };
 
-export const allowIncomming = async (groupId, protocol, cidr, port, description) => {
+export const allowIncomming = async (
+  groupId: string,
+  protocol: string,
+  cidr: string,
+  port: number,
+  description: string,
+) => {
   const params = {
     GroupId: groupId,
     IpPermissions: [
@@ -36,7 +42,13 @@ export const allowIncomming = async (groupId, protocol, cidr, port, description)
   await ec2.authorizeSecurityGroupIngress(params).promise();
 };
 
-export const removeIncomming = async (groupId, protocol, cidr, port, description) => {
+export const removeIncomming = async (
+  groupId: string,
+  protocol: string,
+  cidr: string,
+  port: number,
+  description: string,
+) => {
   const params = {
     GroupId: groupId,
     IpPermissions: [
@@ -46,10 +58,16 @@ export const removeIncomming = async (groupId, protocol, cidr, port, description
   await ec2.revokeSecurityGroupIngress(params).promise();
 };
 
-export const dumpIncommingRules = async () => {
-  const rules = await getIncommingRules();
+export const dumpIncommingRules = async (groupId: string) => {
+  const rules = await getIncommingRules(groupId);
+  if (!rules) {
+    return;
+  }
   rules.forEach((rule) => {
     console.log('%s :%s -> :%s', rule.IpProtocol, rule.FromPort, rule.ToPort);
+    if (!rule.IpRanges) {
+      return;
+    }
     rule.IpRanges.forEach((range) => {
       console.log('  %s (%s)', range.CidrIp, range.Description);
     });
