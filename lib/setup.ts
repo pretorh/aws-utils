@@ -5,4 +5,8 @@ export const defaultConfig = {
 };
 
 AWS.config.update(defaultConfig);
-export default AWS;
+
+export default {
+  EC2: AWS.EC2, // replace with v3 client
+  S3: AWS.S3, // replace with v3 client
+};
