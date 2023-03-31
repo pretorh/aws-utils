@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import AWS from '../lib/setup.js';
+import AWS, { defaultConfig } from '../lib/setup.js';
 
-new AWS.S3().listBuckets().promise()
+new AWS.S3(defaultConfig).listBuckets({})
   .then(console.log);
