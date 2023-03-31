@@ -1,10 +1,10 @@
-import AWS from './setup.js';
+import AWS, { defaultConfig } from './setup.js';
 import buildRuleParams from './util.js';
 
-const ec2 = new AWS.EC2();
+const ec2 = new AWS.EC2(defaultConfig);
 
 export const findGroupId = async (groupName: string) => {
-  const results = await ec2.describeSecurityGroups().promise();
+  const results = await ec2.describeSecurityGroups({});
   const groups = results.SecurityGroups || [];
   const found = groups.filter((group) => group.GroupName === groupName)[0];
   if (!found) {
@@ -17,7 +17,7 @@ export const getIncommingRules = async (groupId: string) => {
   const params = {
     GroupIds: [groupId],
   };
-  const results = await ec2.describeSecurityGroups(params).promise();
+  const results = await ec2.describeSecurityGroups(params);
   const groups = results.SecurityGroups || [];
   const found = groups[0];
   if (!found) {
@@ -39,7 +39,7 @@ export const allowIncomming = async (
       buildRuleParams(protocol, cidr, port, description),
     ],
   };
-  await ec2.authorizeSecurityGroupIngress(params).promise();
+  await ec2.authorizeSecurityGroupIngress(params);
 };
 
 export const removeIncomming = async (
@@ -55,7 +55,7 @@ export const removeIncomming = async (
       buildRuleParams(protocol, cidr, port, description),
     ],
   };
-  await ec2.revokeSecurityGroupIngress(params).promise();
+  await ec2.revokeSecurityGroupIngress(params);
 };
 
 export const dumpIncommingRules = async (groupId: string) => {
